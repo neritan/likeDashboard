@@ -1,0 +1,16 @@
+node_modules
+node_modules/*
+coverage
+.nyc_output
+.DS_Store
+*.log
+.vscode
+.env
+
+dist
+compiled
+docs
+package-lock.lock
+
+yarn-error.log
+

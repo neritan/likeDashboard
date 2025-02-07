@@ -26,7 +26,7 @@ const Dashboard = () => {
       let like = allLikes.find(like => like._id === likeId);
       console.log(like)
       like.likes = like.likes + 1
-      update(`http://localhost:3080/api/v1/likes/${likeId}`).then((res) => {like = res})
+      update(`http://localhost:3080/api/v1/likes/${likeId}`, like).then((res) => {like = res})
       .catch((err) => console.log(err));
     }
   

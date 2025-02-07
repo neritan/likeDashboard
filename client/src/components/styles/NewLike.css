@@ -121,3 +121,6 @@ a.back-to-likes{
     border-radius: 5px;
     text-decoration: none;
 }
+.error-message{
+  color: red;
+}

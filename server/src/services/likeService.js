@@ -4,8 +4,10 @@ const Like = require("../model/like");
 const notFound = "Like not found";
 
 const getLikesList = async (request, response) => {
+  console.log("here");
   Like.find({})
-    .then((result) => response.json({ Likes: result }))
+    .then((result) => response.json({ result }))
+
     .catch((err) => {
       console.error(err);
       response.json({ status: err.code, body: err.message });
@@ -16,7 +18,7 @@ const getLike = async (request, response) => {
   Like.findById(request.params.id)
     .then((result) => {
       if (!result) return response.status(404).send(notFound);
-      return response.status(200).send({ Like: result });
+      return response.status(200).send({ result });
     })
     .catch((err) => {
       console.error(err);
@@ -28,7 +30,8 @@ const createLike = async (
     request,  
       response
   ) => {
-    const likeDto = request.body
+    let likeDto = request.body
+    likeDto.likes = 1;
     const retLike = new Like(likeDto); 
     const saved = await retLike.save();
     return response.status(201).send(saved);
@@ -48,9 +51,9 @@ const deleteLike = async (request, response) => {
 };
 
 
-const updateLike = async (request, response) => {
-    try {
-      const like = await Like.findByIdAndDelete(request.params.id);
+const updateLike = async (request, response) => {    try {
+      const like = await Like.findByIdAndUpdate(request.params.id, request.body);
+      console.log(like)
       if (!like) {
         return response.status(404).send(notFound);
       }
@@ -60,4 +63,4 @@ const updateLike = async (request, response) => {
     }
   };
   
-module.exports = {getLike, createLike, deleteLike, getLikesList, updateLike}  
+module.exports = { getLike, createLike, deleteLike, getLikesList, updateLike }  

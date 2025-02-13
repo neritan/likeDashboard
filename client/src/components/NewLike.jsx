@@ -10,21 +10,21 @@ const NewLike = () => {
     title: "",
     description: "",
     likes: "",
-    category: "",
+    category: "Person",
   });
   const [errors, setErrors] = useState({});
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-
+    const { name, value} = e.target;
+    console.log(name + ": "+ value)
     setLike({
       ...like,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     });
   };
   const newLikeHandle = (e) => {
     e.preventDefault();
     const formError = validateForm(like);
-    console.log(formError);
+    console.log(like);
     setErrors(formError);
     if (Object.keys(formError).length === 0) {
       create("http://localhost:3080/api/v1/likes", like)

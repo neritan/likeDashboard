@@ -3,7 +3,7 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import "./styles/NewLike.css";
 import { deleteById } from "../service/BaseService";
 
-const ShowLike = () => {
+const ShowLike = ({allLikes, setAllLikes}) => {
   //passing variables by Navigation and useLocation
   const like = useLocation().state;
   const navigate = useNavigate();
@@ -12,7 +12,11 @@ const ShowLike = () => {
   const handleDeleteClick = () => {
 
     deleteById(`http://localhost:3080/api/v1/likes/${like._id}`)
-    
+    .then((likeTodelete) => {
+      console.log(likeTodelete);
+      const filtered =  allLikes.filter((like) => like._id != likeTodelete._id)
+      setAllLikes(filtered);
+    })
     .catch((err) => console.log(err));
     navigate('/')
   };

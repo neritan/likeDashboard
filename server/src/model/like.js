@@ -37,8 +37,18 @@ const likeSchema = new mongoose.Schema({
         throw new Error("Like should be a natural number!");
       }
     },
+  },
+  username: {
+    type: String
   }
 },{ collection: "likes", timestamps: true }
 );
  
 module.exports = mongoose.model('Like', likeSchema);
+
+/*
+user: {
+           type: String,
+           ref: 'User',
+           required: true,
+       },*/

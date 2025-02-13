@@ -11,9 +11,11 @@ app.use(
     express.urlencoded({extended: true})
 );
 
-app.use(likeRoute);
+app.use("/api", likeRoute);
 const port = process.env.PORT || 3090;
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+module.exports = app;
